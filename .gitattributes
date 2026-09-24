@@ -1,0 +1,2 @@
+# keep bytes exactly as written so the build output never changes between machines
+* -text

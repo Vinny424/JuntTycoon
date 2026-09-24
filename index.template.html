@@ -1,0 +1,163 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JuntTycoon Room Test</title>
+<style id="jt-fonts">/*@@fonts@@*/@font-face{font-family:'VT323';font-weight:400;font-style:normal;font-display:swap;src:url(@@asset:font/woff2@assets/fonts/VT323-400.woff2@@) format('woff2')}@font-face{font-family:'Silkscreen';font-weight:400;font-style:normal;font-display:swap;src:url(@@asset:font/woff2@assets/fonts/Silkscreen-400.woff2@@) format('woff2')}@font-face{font-family:'Pixelify Sans';font-weight:400;font-style:normal;font-display:swap;src:url(@@asset:font/woff2@assets/fonts/PixelifySans-400.woff2@@) format('woff2')}@font-face{font-family:'Pixelify Sans';font-weight:600;font-style:normal;font-display:swap;src:url(@@asset:font/woff2@assets/fonts/PixelifySans-600.woff2@@) format('woff2')}@font-face{font-family:'Luckiest Guy';font-weight:400;font-style:normal;font-display:swap;src:url(@@asset:font/woff2@assets/fonts/LuckiestGuy-400.woff2@@) format('woff2')}</style>
+<style>
+:root{--bg:#120c09;--panel:#1c140f;--ink:#f0d69c;--ink2:#e8c98a;--dim:#a88660;--line:#3a291d;--acc:#ffb45a;color-scheme:dark}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"VT323",ui-monospace,monospace;font-size:22px;margin:0;padding-inline:16px;padding-block:12px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.wrap{width:100%;max-width:1280px;display:flex;flex-direction:column;gap:8px}
+canvas{width:100%;aspect-ratio:16/9;image-rendering:pixelated;display:block;background:#000}
+.hud{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px 16px;font-family:"Pixelify Sans","Silkscreen",monospace}
+.brand{font-size:24px;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.brand small{font-size:14px;font-weight:400;color:var(--dim);margin-left:10px;letter-spacing:.04em}
+.stats{font-size:16px;color:var(--dim);letter-spacing:.03em}
+.stats b{color:var(--ink);font-weight:400;font-family:"VT323",monospace;font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:.02em;vertical-align:-1px}
+#msg{background:var(--panel);border:2px solid var(--line);padding:8px 12px;min-height:1.3em;line-height:1.15;color:var(--ink2)}
+.row{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.pad{display:flex;gap:8px}
+button{font-family:"Silkscreen",monospace;font-size:13px;background:var(--panel);color:var(--ink);border:2px solid var(--line);padding:9px 14px;touch-action:none;cursor:pointer}
+button:focus-visible{outline:2px solid var(--ink)}
+.dev{display:flex;gap:6px;align-items:center;flex-wrap:wrap;border:2px dashed #4a3a5a;padding:6px 8px}
+.dev span{font-family:"Silkscreen",monospace;font-size:11px;color:#b89ad8;letter-spacing:.05em;margin-right:4px}
+.dev button{font-size:11px;padding:6px 9px;border-color:#3a2d48}
+.dev button[aria-pressed="true"]{background:#b89ad8;color:#140e1a;border-color:#b89ad8}
+.menu{display:flex;flex-wrap:wrap;gap:6px}.menu button{font-family:"VT323",monospace;font-size:20px;padding:6px 12px;text-align:left}
+.screenwrap{position:relative}
+.roll{position:absolute;inset:0;background:rgba(10,7,5,.9);display:flex;align-items:center;justify-content:center;padding:12px;overflow:auto}
+.sheet{width:min(600px,100%);background:#1c140f;border:2px solid #7A5A3A;box-shadow:0 0 0 4px #120c09,0 0 0 6px #3a291d;padding:14px 18px;display:flex;flex-direction:column;gap:8px;max-height:100%;overflow:auto;box-sizing:border-box}
+.sheet h2{font-family:"Pixelify Sans",monospace;font-size:24px;font-weight:600;margin:0;color:var(--ink)}
+.sheet .sub{margin:0;color:var(--dim);font-size:19px}
+.rows{display:grid;grid-template-columns:max-content 1fr;gap:1px 14px;margin:0;font-size:19px;line-height:1.1}
+.rows dt{font-family:"Silkscreen",monospace;font-size:10px;color:var(--dim);letter-spacing:.05em;align-self:center}
+.rows dd{margin:0;color:var(--ink)}
+.rows dd.rolling{color:#7a5a3a}
+.sum{border-top:1px dashed #4a3526;padding-top:6px;font-size:21px;display:flex;flex-direction:column;gap:2px}
+.sum b{font-weight:400;color:var(--ink)}.fine{color:var(--dim);font-size:16px}
+.good{color:#a8dc8c!important}.bad{color:#f08a74!important}
+.traits{font-size:17px;color:var(--ink2);display:flex;flex-direction:column;gap:2px}.traits b{font-weight:400;color:#ffc97a}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.acts button:disabled{opacity:.4;cursor:default}
+.force{margin-left:auto;font-family:"Silkscreen",monospace;font-size:10px;color:#b89ad8;display:flex;gap:4px;align-items:center}
+.force button{font-size:10px;padding:4px 6px;border-color:#3a2d48}
+@media (max-width:760px){.roll{position:static;background:none;padding:8px 0}}
+.devwrap{position:absolute;inset:0;background:rgba(8,6,4,.72);display:flex;align-items:center;justify-content:center;padding:10px;overflow:auto}
+.bezel{width:min(880px,100%);max-height:100%;display:flex;flex-direction:column;background:#141414;border:3px solid #2a2a2a;box-shadow:0 0 0 3px #0a0a0a;padding:10px;box-sizing:border-box}
+.osbar{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#dfe8ef;font-family:"Silkscreen",monospace;font-size:11px;padding:4px 8px}
+.osbar button{font-size:10px;padding:3px 8px}
+.os{display:grid;grid-template-columns:130px 1fr;min-height:0;background:#1b2630}
+.dock{display:flex;flex-direction:column;gap:3px;padding:8px;background:#16202a;border-right:2px solid #0e151c}
+.appbtn{display:flex;align-items:center;gap:8px;text-align:left;font-family:"VT323",monospace;font-size:19px;padding:3px 6px;background:none;border:2px solid transparent;color:#dfe8ef;text-transform:none}
+.appbtn[aria-current="true"]{border-color:#ffffff30;background:#ffffff12}
+.ico{width:14px;height:14px;display:inline-block;flex:none;box-shadow:inset -2px -2px 0 #0005}
+.app{padding:12px 14px;overflow:auto;color:#dfe8ef;font-size:19px;line-height:1.15;max-height:min(60vh,430px)}
+.app h3{font-family:"Pixelify Sans",monospace;font-size:20px;margin:0 0 8px;font-weight:600}
+.app p{margin:6px 0}
+.app .big{font-family:"VT323",monospace;font-size:42px;line-height:1;font-weight:400;font-variant-numeric:tabular-nums}
+.app table{width:100%;border-collapse:collapse;font-size:18px;margin:2px 0 10px}
+.app td{padding:2px 6px 2px 0;border-bottom:1px dashed #ffffff18;vertical-align:top}
+.app td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pos{color:#8fe08a}.neg{color:#ff8a78}.warn{color:#ffc97a}.muted{color:#8fa4b4}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px}
+.card{background:#ffffff0c;border:1px solid #ffffff18;padding:8px 10px}
+.label{font-family:"Silkscreen",monospace;font-size:10px;letter-spacing:.05em;color:#8fa4b4;text-transform:uppercase;margin-top:4px}
+.phone{width:320px;max-width:100%;background:#0c0c0e;border:3px solid #2a2a30;border-radius:24px;padding:14px 10px;display:flex;flex-direction:column;gap:6px;box-shadow:0 0 0 3px #050506;box-sizing:border-box;max-height:100%}
+.pbar{display:flex;justify-content:space-between;font-family:"Silkscreen",monospace;font-size:10px;color:#c8d0dc;padding:0 6px}
+.phone .app{background:#17191f;border-radius:10px;max-height:min(50vh,360px);font-size:18px}
+.pdock{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.pdock .appbtn{flex-direction:column;font-size:15px;gap:2px;padding:4px 2px;align-items:center;text-align:center}
+.home{align-self:center;font-size:10px;padding:5px 10px}
+@media (max-width:760px){.devwrap{position:static;background:none;padding:8px 0}.os{grid-template-columns:1fr}.dock{flex-direction:row;flex-wrap:wrap;border-right:0}}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0;border-bottom:1px dashed #ffffff18}
+.item b{font-weight:400;color:#fff}
+.act{font-family:"VT323",monospace;font-size:18px;padding:4px 10px;background:#2c4a3a;border-color:#4fc07a;color:#e8ffe8;white-space:nowrap}
+.act:disabled{opacity:.35;cursor:default}
+.toast{background:#ffc97a22;border:1px solid #ffc97a66;padding:6px 8px;color:#ffe2b0}
+.btncol{display:flex;flex-direction:column;gap:4px}
+.act.ghost{background:none;border-color:#ffffff30;color:#dfe8ef}
+.app td:first-child{white-space:nowrap}
+.badge{font-family:"Silkscreen",monospace;font-size:9px;background:#5a9af033;border:1px solid #5a9af0;color:#bcd6ff;padding:1px 4px;vertical-align:middle}
+.app-card{margin:6px 0;padding:6px 8px;background:#ffffff08;border-left:2px solid #ffffff30}
+.uilayer{position:absolute;left:0;top:0;pointer-events:none;image-rendering:auto;background:transparent!important}
+.ebar{display:inline-block;width:64px;height:9px;border:1px solid var(--dim);vertical-align:middle;padding:1px;box-sizing:border-box}.ebar i{display:block;height:100%;background:var(--ink)}
+.desk{position:relative;height:min(60vh,460px);min-height:300px;overflow:hidden}
+.icons{display:flex;flex-direction:column;flex-wrap:wrap;align-content:flex-start;gap:2px;height:100%;padding:8px;box-sizing:border-box}
+.dicon{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;width:78px;padding:4px 2px;background:none;border:2px solid transparent;color:#fff;font-family:"VT323",monospace;font-size:17px;text-shadow:1px 1px 0 #000;text-transform:none}
+.dicon:hover,.dicon:focus-visible{background:#ffffff1a;border-color:#ffffff40}
+.dicon img{width:36px;height:36px;image-rendering:pixelated}
+.dicon em{position:absolute;top:0;right:12px;background:#e05a4a;color:#fff;font-style:normal;font-family:"Silkscreen",monospace;font-size:9px;padding:1px 4px}
+.win{position:absolute;inset:10px 10px 10px 180px;display:flex;flex-direction:column;background:#1b2630;border:2px solid #0e151c;box-shadow:4px 4px 0 #0007}
+.wbar{display:flex;justify-content:space-between;align-items:center;background:#2c3e50;color:#dfe8ef;padding:3px 4px 3px 10px;font-family:"Silkscreen",monospace;font-size:11px}
+.wbar button{font-size:11px;padding:2px 8px}
+.win .app{flex:1;max-height:none}
+.taskbar{display:flex;align-items:center;gap:10px;background:#101418;color:#c8d0dc;font-family:"Silkscreen",monospace;font-size:10px;padding:4px 6px}
+.taskbar .start{background:#c9a24a;color:#1a1410;padding:3px 8px}.taskbar .tb-right{margin-left:auto}.taskbar button{font-size:10px;padding:3px 8px}
+.tabs{display:flex;gap:4px;margin-bottom:8px}.tab{font-family:"VT323",monospace;font-size:18px;padding:3px 10px;background:none;border-color:#ffffff30;color:#dfe8ef;text-transform:none}.tab[aria-pressed="true"]{background:#ffffff20;border-color:#dfe8ef}
+.home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px 4px;min-height:260px;align-content:start;background:linear-gradient(160deg,#2a3a5a,#10141e);border-radius:10px}
+.home-grid .dicon{width:auto}
+.phead{display:flex;align-items:center;gap:8px;color:#dfe8ef;font-family:"Pixelify Sans",monospace}.phead button{font-size:10px;padding:3px 8px}
+@media (max-width:760px){.win{inset:0}.icons{flex-direction:row}}
+.splash{position:absolute;inset:0;overflow:hidden;background:#120c09;z-index:5;transition:opacity .6s}
+.splash.out{opacity:0}
+.splash img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;image-rendering:pixelated;animation:spDrift 30s ease-in-out infinite alternate}
+.splash .sp-eve{opacity:0;transition:opacity 2s}.splash.night .sp-shade{background:radial-gradient(ellipse at 50% 45%,rgba(8,6,20,.35),rgba(6,4,14,.8))}
+@keyframes spFade{0%,25%{opacity:0}75%,100%{opacity:1}}
+@keyframes spDrift{from{transform:scale(1.02) translateX(-.6%)}to{transform:scale(1.06) translateX(.6%)}}
+.sp-shade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(10,6,4,.15),rgba(10,6,4,.6))}
+.sp-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:12px}
+.sp-title{margin:0;font-family:"Luckiest Guy","Pixelify Sans",cursive;font-weight:400;font-size:clamp(40px,9vw,112px);line-height:.95;letter-spacing:.03em;color:#ffd35a;-webkit-text-stroke:3px #3a1e0a;paint-order:stroke fill;text-shadow:0 6px 0 #3a1e0a,0 14px 24px rgba(0,0,0,.55);transform:rotate(-3deg);animation:spPop .9s cubic-bezier(.2,1.6,.4,1) both}
+.sp-title span:last-child{color:#fff1c8}
+@keyframes spPop{from{transform:rotate(-3deg) scale(.4);opacity:0}to{transform:rotate(-3deg) scale(1);opacity:1}}
+.sp-sub{margin:10px 0 6px;background:rgba(20,12,8,.62);padding:4px 12px;font-family:"Pixelify Sans",monospace;font-size:clamp(14px,2vw,20px);color:#fff1c8;text-shadow:0 2px 0 #3a1e0a}
+.sp-start{font-family:"Luckiest Guy","Pixelify Sans",cursive;font-size:clamp(18px,2.4vw,26px);letter-spacing:.06em;padding:10px 28px 6px;background:#c9412f;color:#fff1c8;border:3px solid #3a1e0a;box-shadow:0 5px 0 #3a1e0a;text-transform:none}
+.sp-start:hover{background:#e0503a}.sp-start:active{transform:translateY(3px);box-shadow:0 2px 0 #3a1e0a}
+.sp-hint{margin:4px 0 0;font-family:"Silkscreen",monospace;font-size:10px;color:#fff1c8b0;letter-spacing:.08em}
+@media (prefers-reduced-motion:reduce){.splash img,.sp-title{animation:none}.splash .sp-eve{opacity:.5}}
+.wake{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(8,6,4,.55);z-index:4;padding:10px}
+.wake-card{width:min(560px,100%);max-height:100%;overflow:auto;box-sizing:border-box;background:#1c140f;border:2px solid #7A5A3A;box-shadow:0 0 0 4px #120c09,0 0 0 6px #3a291d;padding:14px 18px;color:var(--ink2);font-size:19px;animation:wakeIn .5s ease-out both}
+@keyframes wakeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wake-card h2{font-family:"Pixelify Sans",monospace;font-size:24px;font-weight:600;margin:0;color:var(--ink)}
+.wake-card p{margin:4px 0}.wake-card table{width:100%;border-collapse:collapse}.wake-card td{padding:1px 4px 1px 0;border-bottom:1px dashed #ffffff14}.wake-card td.n{text-align:right;white-space:nowrap}
+.wake-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.wake-sum{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 4px;padding-top:8px;border-top:1px dashed #4a3526;font-size:21px}.wake-sum b{font-weight:400;color:var(--ink)}
+.wake-card ul{margin:2px 0 8px;padding-left:18px;font-size:17px}
+.wake-card .act{margin-top:6px}
+@media (max-width:760px){.wake{position:fixed}.wake-cols{grid-template-columns:1fr}}
+.keys{font-family:"Silkscreen",monospace;font-size:11px;color:var(--dim);text-align:center}
+</style>
+
+<div class="wrap">
+  <div class="hud">
+    <div class="brand">JuntTycoon<small id="stageName">Studio Apartment · Night</small></div>
+    <div class="stats">Day <b id="day">1</b> · <b id="clock">11:40 PM</b> · Energy <b id="energy">--</b> · Cash <b id="cash">$312</b> · Credit <b id="credit">—</b> · <b id="units">0 units</b></div>
+  </div>
+  <div class="screenwrap"><canvas id="screen" width="1280" height="720"></canvas>
+  <div class="devwrap" id="device" hidden></div>
+  <div class="roll" id="roll" hidden>
+    <div class="sheet" role="dialog" aria-labelledby="rollTitle">
+      <h2 id="rollTitle">Your life so far</h2>
+      <p class="sub">Nobody picks where they start. This is yours.</p>
+      <dl class="rows" id="lifeRows"></dl>
+      <div class="sum" id="lifeSum"></div>
+      <div class="traits" id="lifeTraits"></div>
+      <div class="acts"><button id="begin">Begin</button><button id="reroll">Reroll</button>
+        <span class="force">dev: <button data-force="low">Low</button><button data-force="middle">Middle</button><button data-force="upper">Upper</button></span></div>
+    </div>
+  </div>
+</div>
+  <div id="msg">Your place. It isn't much. Walk with A/D or the arrow keys, and press E to interact.</div>
+  <div class="menu" id="menu" hidden></div>
+  <div class="row">
+    <div class="dev" id="dev"><span>ALPHA DEV · STAGE</span></div>
+    <div class="pad">
+      <button id="bl" aria-label="Walk left">◀</button>
+      <button id="be" aria-label="Interact">E</button>
+      <button id="br" aria-label="Walk right">▶</button>
+    </div>
+  </div>
+  <div class="keys">A / D or ← → to walk · E to interact · E at the bed to sleep · 1–5 stage · F shaders · M market mood (dev only)</div>
+</div>
+
+<script>@@SRC@@</script>
