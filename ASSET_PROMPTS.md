@@ -232,10 +232,89 @@ Keep the character's size, proportions and position consistent from frame to fra
 | **Pin a note on the corkboard** | `corkboard_v1` | 3: 1 holding a small index card · 2 pressing it onto the wall with a thumb · 3 stepping back, arms crossed, looking at it |
 | **Peek through the blinds** | `blinds_v1` | 3: 1 raising two fingers to eye level · 2 fingers spreading two blind slats apart, eyes peeking (slats NOT drawn) · 3 letting go, turning away |
 
+### G2+ ☐ Studio (hoodie): full ready-to-paste prompts
+**Attach:** `assets/art/character/player_hoodie_sheet_v1.webp` for every one. Save each as `assets/art/character/anim/hoodie_<name>_v1.webp`. All share this closing line, already included below: *"Keep the character's size, proportions and position consistent… no text, no numbers, no watermark."*
+
+**hoodie_door_v1** (open the apartment door and head out)
+```text
+Using the attached sprite sheet as the exact character, outfit and style reference (same person, same olive hoodie, dark jeans and white sneakers, same pixel size, same scale, same colors), create ONE horizontal row of 4 animation frames on a flat solid magenta (#FF00FF) background, evenly spaced, all standing on the same baseline, strict side view facing RIGHT:
+1 standing close to a door, reaching one hand forward to a doorknob at waist height · 2 hand gripping and turning the knob, shoulders squared · 3 pulling the arm back as the door opens, weight shifting forward · 4 mid-stride stepping forward, the body turning slightly away from the viewer, hood up
+Keep the character's size, proportions and position consistent from frame to frame so the frames play smoothly as an animation. Do NOT draw the door, walls or floor. True pixel art: hard edges, no anti-aliasing, no blur, no shadows, no ground, no text, no numbers, no watermark.
+```
+
+**hoodie_pullcord_v1** (the bare-bulb pull chain)
+```text
+[same opening as above] create ONE horizontal row of 4 animation frames … facing RIGHT:
+1 looking up, one arm reaching straight up overhead · 2 fingers closed around a thin beaded pull chain that hangs from above (only the short piece of chain in the hand is drawn) · 3 tugging the chain down, elbow bent, head tilted back · 4 arm dropping back to the side, squinting slightly as if a light just changed
+[same closing lines as above]
+```
+
+**hoodie_fridge_v1** (the mini fridge: tragic snack check)
+```text
+[same opening] create ONE horizontal row of 5 animation frames … facing RIGHT:
+1 bending down, one hand reaching low toward knee height · 2 crouched, pulling something open toward the viewer (no fridge drawn), a faint cool-white light on the face and hands · 3 crouched, peering in, eyebrows raised, disappointed · 4 standing back up holding a single white egg in one hand · 5 standing, looking at the egg in the palm, deadpan
+[same closing lines]
+```
+
+**hoodie_laptop_v1** (sit on the milk crate and use the laptop)
+```text
+[same opening] create ONE horizontal row of 4 animation frames … facing RIGHT:
+1 lowering to sit on something low (a milk crate, not drawn), knees bending sharply · 2 seated low, knees high, hunched forward, hands reaching forward at chest height · 3 seated hunched, typing, one hand raised · 4 seated hunched, typing, the other hand raised, the face lit by a faint blue screen glow
+[same closing lines]
+```
+
+**hoodie_calendar_v1** (check the wall calendar)
+```text
+[same opening] create ONE horizontal row of 3 animation frames … facing RIGHT:
+1 stepping close, looking at something on the wall at head height · 2 one hand lifting a paper page on the wall (only the hand motion; the page is not drawn) · 3 hand on the back of the neck, wincing (rent is due)
+[same closing lines]
+```
+
+**hoodie_corkboard_v1** (pin a note)
+```text
+[same opening] create ONE horizontal row of 3 animation frames … facing RIGHT:
+1 holding a small white index card at chest height · 2 arm raised, pressing the card onto the wall at head height with the thumb · 3 stepping back half a step, arms crossed, nodding at it
+[same closing lines]
+```
+
+**hoodie_blinds_v1** (peek through the blinds)
+```text
+[same opening] create ONE horizontal row of 3 animation frames … facing RIGHT:
+1 raising two fingers of one hand to eye level · 2 fingers spread apart as if parting window blind slats (slats not drawn), eyes peeking through, a thin orange streetlight stripe across the eyes · 3 letting go and turning the head back toward the viewer, thoughtful
+[same closing lines]
+```
+
+**hoodie_phone_v1** (pull out the phone; used everywhere)
+```text
+[same opening] create ONE horizontal row of 3 animation frames … facing RIGHT:
+1 hand reaching into the hoodie pocket · 2 holding a smartphone at chest height, looking down, the face lit by the screen · 3 thumb tapping the screen, slight smile
+[same closing lines]
+```
+
+**hoodie_liedown_v1** (improved bedtime)
+```text
+[same opening] create ONE horizontal row of 5 animation frames … facing RIGHT:
+1 sitting on the edge of a low mattress (not drawn), arms stretched up, yawning · 2 leaning back onto one elbow · 3 swinging the legs up, half reclined · 4 lying flat on the back pulling an olive-green blanket up to the chest (the blanket IS drawn, held in the hands) · 5 lying flat asleep under the blanket, eyes closed, head on the RIGHT
+[same closing lines]
+```
+
+**hoodie_sleeploop_v1** (breathing while asleep)
+```text
+[same opening] create ONE horizontal row of 3 animation frames, horizontal lying poses, head on the RIGHT:
+1 asleep on the back under an olive-green blanket, chest down · 2 same, chest slightly raised (breathing in) · 3 rolled slightly toward the viewer, one arm flopped over the head, mouth slightly open
+[same closing lines]
+```
+
+**hoodie_wake_v1** (morning)
+```text
+[same opening] create ONE horizontal row of 4 animation frames … facing RIGHT:
+1 lying on the back, eyes blinking open, the blanket still on · 2 sitting up suddenly, rubbing the eyes with one fist, the blanket falling to the lap · 3 sitting on the edge of the mattress, groggy, hand on the back of the neck · 4 standing up, starting a big stretch
+[same closing lines]
+```
 ### G3 ☐ Suite 2B actions (bomber)
 | Action | Save as `bomber_` | Frames |
 |---|---|---|
-| **Water cooler: fill and drink** | `watercooler_v1` | 5: 1 taking a small paper cup from a holder · 2 bending slightly, holding the cup low at a tap · 3 standing, cup filled · 4 tilting the head back, drinking · 5 crumpling the paper cup, satisfied |
+| **Water cooler: fill and drink** ✅ done | `watercooler_v1` | 5: 1 taking a small paper cup from a holder · 2 bending slightly, holding the cup low at a tap · 3 standing, cup filled · 4 tilting the head back, drinking · 5 crumpling the paper cup, satisfied |
 | **Write on the whiteboard** | `whiteboard_v1` | 4: 1 uncapping a marker · 2 writing high on the wall, arm raised · 3 writing lower, arm across the body · 4 stepping back, tapping the marker on the chin, thinking |
 | **Search the filing cabinet** | `files_v1` | 4: 1 pulling a drawer out (drawer not drawn, pulling motion) · 2 flipping through folders with both hands · 3 pulling out one folder · 4 reading the folder, eyebrows raised |
 | **Look at the bandit sign** | `pointsign_v1` | 3: 1 looking up at the wall · 2 pointing at it with one hand, grinning · 3 fist pump, determined |
