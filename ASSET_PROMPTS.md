@@ -371,3 +371,10 @@ Keep the character's size, proportions and position consistent from frame to fra
 
 ### Asset index (already done ✅)
 splash day/evening · studio night/day · 2B night/day · corner suite golden hour · estate golden/night/exterior · hoodie sheet + poses · bomber sheet + poses
+
+
+### Studio animation progress — 2026-09-24
+- Approved and integrated: hoodie pull-cord strip, `assets/art/character/anim/hoodie_pullcord_v1.png`.
+- `src/41-studio-pullcord.js` covers the baked chain at render time with adjacent wallpaper, draws a longer independent chain, and toggles the bulb once during the tug. Source background images remain intact. Four transparent frames; no magenta key needed.
+- Verified: four frames load, two pulls toggle on/off, input resumes, day/night render with no browser errors.
+- Next: studio fridge, then door; finish the Studio interactions before moving on to 2B.
