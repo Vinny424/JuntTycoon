@@ -27,6 +27,7 @@ src/NN-name.js        game modules, concatenated in filename order
 assets/art/<stage>/   painted backgrounds, sprite sheets, splash art (.webp)
 assets/fonts/         woff2 fonts (embedded so the game works offline)
 ROADMAP.md            design decisions, systems, art status, what's next
+ASSET_PROMPTS.md      every remaining art prompt, with file names and folders
 ```
 
 ## Conventions

@@ -56,6 +56,8 @@ A 2D pixel-art real estate tycoon game (a walkable 3D version in Unity or Unreal
 **Prompt rules that work:** attach an existing image as the style reference; flat orthographic "dollhouse cross-section" side view; 16:9; the bottom 17% is a walkable floor clear of furniture; a doorway is about 27% of image height; list objects left to right with % positions; "true pixel art, hard edges, no anti-aliasing"; "not horror"; no people, text, UI or watermark. For time-of-day variants: "keep the IDENTICAL composition… change only the time." For sprites: solid magenta #FF00FF background, one row, same scale.
 
 ## 5. Next up (pipeline)
+Full art checklist with ready-to-paste prompts: see ASSET_PROMPTS.md.
+
 1. Corner suite night → blazer outfit sheet + poses
 2. Estate: daytime version, study room (the work area) and turtleneck outfit; penthouse art + suit outfit
 3. Walkthrough house interiors by grade (D/C/B), each with dark and lit versions
