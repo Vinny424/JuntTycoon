@@ -197,6 +197,83 @@ Attach the base image and ask for a near-identical copy with one small change. T
 
 ---
 
+## Phase G: interaction animations (every action gets one)
+Every interactable plays a short animation: you walk to the object, the animation plays, then the action happens (menu, sleep, time skip, and so on). These are **sprite strips**: a single row of 3–6 frames on magenta, in the outfit for the stage where the action happens. Actions that exist in every stage (door, computer, phone, sleep) are needed for **every outfit**.
+
+> Image generators drift between frames, so ask for **3–5 key frames**. The game holds and blends between them (an ease-in, a pause on the key pose, an ease-out). If one frame comes out wrong, regenerate just that strip.
+
+### Strip prompt template
+**Attach:** the outfit's walk sheet (for example `character/player_hoodie_sheet_v1.webp`) · **Save as:** `assets/art/character/anim/<outfit>_<action>_v1.webp`
+```text
+Using the attached sprite sheet as the exact character, outfit and style reference (same person, same outfit, same pixel size, same scale, same colors), create ONE horizontal row of {N} animation frames on a flat solid magenta (#FF00FF) background, evenly spaced, all standing on the same baseline, strict side view facing RIGHT:
+
+{FRAME LIST}
+
+Keep the character's size, proportions and position consistent from frame to frame so the frames play smoothly as an animation. Draw any prop listed as part of the frame only if it is held by the character; do NOT draw furniture, walls or the floor. True pixel art: hard edges, no anti-aliasing, no blur, no shadows, no ground, no text, no numbers, no watermark.
+```
+
+### G1 ☐ Universal actions: every outfit (hoodie, bomber, blazer, turtleneck, suit)
+| Action | Save as `…/anim/<outfit>_` | Frames ({N} and {FRAME LIST}) |
+|---|---|---|
+| **Open a door and step out** | `door_v1` | 4: 1 reaching toward a doorknob at waist height · 2 hand on the knob, turning · 3 pulling the door-side arm back, leaning into the step · 4 mid-step forward, body half turned away from the viewer |
+| **Sit at a computer and type** | `computer_v1` | 4: 1 lowering onto a chair (no chair drawn), knees bending · 2 seated upright, hands at keyboard height · 3 seated typing, one hand raised · 4 seated typing, the other hand raised |
+| **Use the phone** | `phone_v1` | 3: 1 pulling a phone from a pocket · 2 holding the phone at chest height, looking down at the glowing screen · 3 thumb tapping, slight smile |
+| **Lie down to sleep** (improved) | `liedown_v1` | 5: 1 sitting on the edge of a bed (no bed), stretching and yawning · 2 leaning back on one elbow · 3 swinging legs up, half reclined · 4 lying flat on the back, pulling a blanket up (blanket drawn, held in hands) · 5 lying flat asleep under the blanket, eyes closed |
+| **Sleeping** (loop) | `sleep_loop_v1` | 3: 1 asleep on the back, chest down · 2 asleep, chest slightly raised (breathing) · 3 asleep turned slightly onto one side, one arm over the head |
+| **Wake up** | `wake_v1` | 4: 1 eyes opening while lying down · 2 sitting up abruptly, rubbing eyes · 3 sitting on the edge, groggy, hand on neck · 4 standing up, starting to stretch |
+| **Flashlight walk** (walkthroughs) | `flashlight_walk_v1` | 4: a 4-frame walk cycle with one arm held forward pointing a small flashlight (the flashlight is drawn, its beam is NOT drawn) |
+
+### G2 ☐ Studio actions (hoodie)
+| Action | Save as `hoodie_` | Frames |
+|---|---|---|
+| **Pull the light cord** | `pullcord_v1` | 4: 1 looking up, reaching one arm straight up · 2 hand closed around a short cord overhead (cord drawn in the hand) · 3 tugging down, elbow bent · 4 arm dropping, relaxed |
+| **Open the mini fridge** | `fridge_v1` | 4: 1 crouching slightly, reaching low · 2 pulling a small door toward the viewer (door not drawn, pulling motion) · 3 peering down into the fridge, disappointed · 4 standing up holding a single egg |
+| **Check the calendar** | `calendar_v1` | 3: 1 stepping close, looking at the wall · 2 lifting a page with one hand · 3 hand on hip, sighing |
+| **Pin a note on the corkboard** | `corkboard_v1` | 3: 1 holding a small index card · 2 pressing it onto the wall with a thumb · 3 stepping back, arms crossed, looking at it |
+| **Peek through the blinds** | `blinds_v1` | 3: 1 raising two fingers to eye level · 2 fingers spreading two blind slats apart, eyes peeking (slats NOT drawn) · 3 letting go, turning away |
+
+### G3 ☐ Suite 2B actions (bomber)
+| Action | Save as `bomber_` | Frames |
+|---|---|---|
+| **Water cooler: fill and drink** | `watercooler_v1` | 5: 1 taking a small paper cup from a holder · 2 bending slightly, holding the cup low at a tap · 3 standing, cup filled · 4 tilting the head back, drinking · 5 crumpling the paper cup, satisfied |
+| **Write on the whiteboard** | `whiteboard_v1` | 4: 1 uncapping a marker · 2 writing high on the wall, arm raised · 3 writing lower, arm across the body · 4 stepping back, tapping the marker on the chin, thinking |
+| **Search the filing cabinet** | `files_v1` | 4: 1 pulling a drawer out (drawer not drawn, pulling motion) · 2 flipping through folders with both hands · 3 pulling out one folder · 4 reading the folder, eyebrows raised |
+| **Look at the bandit sign** | `pointsign_v1` | 3: 1 looking up at the wall · 2 pointing at it with one hand, grinning · 3 fist pump, determined |
+| **Couch lie down / wake** | use G1 `liedown`, `sleep_loop`, `wake` in the bomber outfit | |
+
+### G4 ☐ Corner suite actions (blazer)
+| Action | Save as `blazer_` | Frames |
+|---|---|---|
+| **Pull a book from the shelf** | `bookshelf_v1` | 4: 1 reaching up to a high shelf · 2 sliding out a thick book · 3 opening the book, reading · 4 closing it with a satisfied nod |
+| **Banker's lamp chain** | `lampchain_v1` | 3: 1 leaning over a desk, reaching low · 2 pinching a small pull chain (chain in the fingers) · 3 tugging, the hand coming back up |
+| **Admire the framed deed** | `deed_v1` | 3: 1 looking up at the wall, hands in pockets · 2 straightening a picture frame with one hand (frame NOT drawn, only the hand motion) · 3 small proud smile |
+| **Water the fiddle-leaf fig** | `waterplant_v1` | 4: 1 holding a small brass watering can · 2 tilting the can, pouring low · 3 still pouring · 4 setting the can down |
+| **Look out the window** | `lookout_v1` | 3: 1 walking up, slowing · 2 standing still, hands clasped behind the back · 3 same pose, head tilted slightly up |
+
+### G5 ☐ Estate actions (turtleneck)
+| Action | Save as `turtleneck_` | Frames |
+|---|---|---|
+| **Climb the staircase** | `stairs_up_v1` | 4: a 4-frame walk-up cycle facing LEFT, stepping up (knee raised high on alternate frames), one hand resting on a railing at hip height (railing NOT drawn) |
+| **Open the grand double doors** | `grand_doors_v1` | 4: 1 both hands reaching forward at chest height · 2 pushing both arms forward, leaning in · 3 arms spread wide as if doors swing open · 4 stepping through, chin up |
+| **Smell the roses** | `flowers_v1` | 3: 1 leaning toward something at waist height · 2 eyes closed, inhaling · 3 straightening up, content |
+| **Admire the bust** | `bust_v1` | 3: 1 hand on chin, studying something at head height · 2 head tilted, skeptical · 3 shrug |
+
+### G6 ☐ Penthouse actions (suit)
+| Action | Save as `suit_` | Frames |
+|---|---|---|
+| **Elevator button and exit** | `elevator_v1` | 4: 1 pressing a wall button with one finger · 2 adjusting the cuffs while waiting · 3 stepping forward · 4 turning away mid-step |
+| **Play the piano** | `piano_v1` | 4: 1 sitting down on a bench (no bench drawn), flipping the jacket tails · 2 seated, hands raised over keys (keys NOT drawn) · 3 hands down, head bowed · 4 hands raised, head tilted back, eyes closed |
+| **Arc lamp switch** | `lampswitch_v1` | 3: 1 reaching toward a switch at waist height · 2 clicking it · 3 hand back |
+| **The view** | use the G4 `lookout` frames in the suit outfit | |
+
+### Engine plan (Claude)
+- Every interactable gets an **anchor x** and an **animation id**. Pressing E walks you to the anchor, faces the object, plays the strip, then does the action.
+- Strips load through the same magenta cleanup as the walk sheets. Frame timings, hold frames and a small shake or sound on the key frame make 3–5 AI frames feel smooth.
+- Scenery animates too (a door swinging open, the cord bobbing, the fridge light, the water glugging in the cooler jug). That's drawn in code over the background until painted variant frames exist.
+- Until a strip exists, the current fallback stays: walk up and a quick bob.
+
+---
+
 ## Phase E: characters and UI (nice to have)
 - ☐ **E1 Tenant and NPC portraits:** attach the hoodie sheet (style) · *"A grid of 8 head-and-shoulders pixel art portraits on a flat magenta (#FF00FF) background, same pixel style, diverse ages, genders and ethnicities, friendly neutral expressions, everyday clothes. Each portrait in its own square, evenly spaced, no text."* Save as `assets/art/ui/portraits_tenants_v1.webp`.
 - ☐ **E2 Recurring characters:** the same format with 4 portraits: *"Mike, a scruffy middle-aged handyman in a cap; Vince Marlow, a slick slumlord in a gold chain and leather jacket; Keiko Hart, a sharp syndicator in a tailored grey suit; a kind older landlord in a cardigan."* Save as `assets/art/ui/portraits_cast_v1.webp`.

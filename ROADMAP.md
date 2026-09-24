@@ -58,6 +58,8 @@ A 2D pixel-art real estate tycoon game (a walkable 3D version in Unity or Unreal
 ## 5. Next up (pipeline)
 Full art checklist with ready-to-paste prompts: see ASSET_PROMPTS.md.
 
+**Interaction animations are required for every action** (doors, computer, phone, the light cord, the fridge, the water cooler, the whiteboard, the files, bookshelves, lamps, the piano, the elevator, stairs, the flashlight walk, and improved lie-down/sleep/wake). Sprite strips per outfit: see ASSET_PROMPTS.md Phase G. Engine: walk to the anchor → play the strip → run the action.
+
 1. Corner suite night → blazer outfit sheet + poses
 2. Estate: daytime version, study room (the work area) and turtleneck outfit; penthouse art + suit outfit
 3. Walkthrough house interiors by grade (D/C/B), each with dark and lit versions
