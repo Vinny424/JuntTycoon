@@ -378,3 +378,11 @@ splash day/evening · studio night/day · 2B night/day · corner suite golden ho
 - `src/41-studio-pullcord.js` covers the baked chain at render time with adjacent wallpaper, draws a longer independent chain, and toggles the bulb once during the tug. Source background images remain intact. Four transparent frames; no magenta key needed.
 - Verified: four frames load, two pulls toggle on/off, input resumes, day/night render with no browser errors.
 - Next: studio fridge, then door; finish the Studio interactions before moving on to 2B.
+
+
+### Studio fridge inventory — 2026-09-24
+- Approved empty fridge integrated as a close-up modal, opened from the Studio Fridge interactable. Escape/Close restores walking; time and energy pause inside.
+- Background: `assets/art/studio/fridge/studio_fridge_empty_v1.png`. Module: `src/42-studio-fridge.js`.
+- Pending review: separate apple, yogurt, leftovers, cheese, water and mustard sprites. No eating or restocking implemented in this empty-fridge phase.
+- Next: clickable food with energy values and persistent limited random morning restocks; later shopping and delayed delivery. Character lean-in transition remains pending refinement.
+- Revisit light-cord sprite/hand alignment: user finds it slightly floating; current version accepted temporarily.

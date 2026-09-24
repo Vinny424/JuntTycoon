@@ -152,7 +152,7 @@ function frame(now){ui.clearRect(0,0,W,H);
  else{
   const dir=mode=='free'?(keys['d']||keys['arrowright']?1:0)-(keys['a']||keys['arrowleft']?1:0):0,spd=(energy<20?1.2:1.785)*(1+(econ.speedBonus||0));
   pl.vx=dir*spd;if(dir)pl.face=dir;pl.x=Math.max(14,Math.min(626,pl.x+pl.vx*dt));pl.walk+=Math.abs(pl.vx)*dt*.12;
-  if(mode!='roll'&&mode!='device'&&mode!='wake'&&mode!='title'){gameMin+=dt/30*paceAwake();if(gameMin>=1440){gameMin-=1440;day++;newDay(day)}
+  if(mode!='roll'&&mode!='device'&&mode!='wake'&&mode!='title'&&mode!='fridge'){gameMin+=dt/30*paceAwake();if(gameMin>=1440){gameMin-=1440;day++;newDay(day)}
   energy=Math.max(0,energy-dt/300*paceAwake());}if(energy<20&&!lowWarned&&mode=='free'){lowWarned=true;say('You are exhausted and moving slowly. Go to bed.')}if(energy>=20)lowWarned=false;
  }
  const h=gameMin/60,dd=dayCurve(h)-dayCurve(st.sig),dP=Math.max(0,dd),dN=Math.max(0,-dd),dawn=Math.exp(-(((h-6.8)/.9)**2));
