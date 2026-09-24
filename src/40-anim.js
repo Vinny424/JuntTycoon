@@ -43,4 +43,8 @@ drawPlayer=function(c,o,stretch){
 registerAnim('bomber_watercooler','@@asset:image/webp@assets/art/character/anim/bomber_watercooler_v1.webp@@',[36,50,24,56,44],{erase:[[680,355,52,70]]});
 {const t=STAGES[1].things.find(t=>t.name=='Water cooler');if(t)t.act=()=>{
  if(st.sheet!='bomber'||!ANIMS.bomber_watercooler)return say('Glug. The only employee benefit.');
- playAnim('bomber_watercooler',t.x-24,1,()=>{energy=Math.min(100,energy+4);say('Glug. Ice-cold water, +4 energy. The only employee benefit.')})}}
+ playAnim('bomber_watercooler',t.x-24,1,()=>{const now=day*1440+gameMin,left=Math.ceil(COOLER_COOLDOWN-(now-lastDrink));
+  if(left>0)return say(`Glug. Not thirsty yet (energy boost again in ${left} min).`);
+  lastDrink=now;energy=Math.min(100,energy+4);say('Glug. Ice-cold water, +4 energy. The only employee benefit.')})}}
+// the energy boost works at most once per in-game hour so it can't be farmed
+const COOLER_COOLDOWN=60;let lastDrink=-1e9;
