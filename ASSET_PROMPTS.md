@@ -1,3 +1,5 @@
+See ASSET_STYLE_GUIDE.md for the studio/2B reference analysis and precise food-sprite constraints.
+
 # JuntTycoon: Asset Prompts
 
 Every remaining art asset for the 2D game, in production order. For each one: what to attach, the prompt to paste, and the exact file name and folder for the repo.
